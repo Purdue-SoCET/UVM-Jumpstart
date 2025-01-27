@@ -1,0 +1,6 @@
+.DS_Store
+run/modelsim_lib/*
+run/*.wlf
+run/transcript
+run/wave.do
+run/modelsim.ini
