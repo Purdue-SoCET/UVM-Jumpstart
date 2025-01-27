@@ -1,0 +1,3 @@
+[submodule "PurdNyUart"]
+	path = PurdNyUart
+	url = https://github.com/NYU-Processor-Design/PurdNyUart.git
