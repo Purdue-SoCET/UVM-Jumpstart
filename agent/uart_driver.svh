@@ -4,7 +4,7 @@ class uart_driver extends uvm_driver #(uart_seqit);
     extern function new(string name = "test_top" , uvm_component parent);
     extern function void build_phase(uvm_phase phase);
     extern function void connect_phase(uvm_phase phase);
-    extern task void run_phase(uvm_phase phase)
+    extern task run_phase(uvm_phase phase)
 
 endclass:uart_driver
 
