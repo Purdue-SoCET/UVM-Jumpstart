@@ -9,7 +9,6 @@ endclass:uart_monitor
 
 function uart_monitor::new(string name ="uart_monitor",uvm_component parent);
    super.new(name, parent);
-   monitor_port_ap = new("monitor_port_ap", this);
 endfunction:new
 
 function void uart_monitor::build_phase(uvm_phase phase);
