@@ -1,7 +1,9 @@
 class uart_seqit extends uvm_sequence_item;
    `uvm_object_utils(uart_seqit)
 
-   extern function new(string name="uart_seqit");
+    bit [7:0] data_arr[];
+
+    extern function new(string name="uart_seqit");
 
 endclass:uart_seqit
 
