@@ -1,2 +1,2 @@
 * linguist-vendored
-*.SystemVerilog linguist-vendored=false
+* .SystemVerilog linguist-vendored=false
