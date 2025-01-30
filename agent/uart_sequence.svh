@@ -10,7 +10,7 @@ function uart_sequence::new(string name = "uart_sequence");
     // Create seqeunce item
 endfunction:new
 
-virtual task uart_sequence::body();
+task uart_sequence::body();
     start_item(req);
     // assign transactions
     finish_item(req);

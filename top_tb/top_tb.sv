@@ -1,4 +1,11 @@
+`timescale 1ns/1ps
+`include "uart_pkg.svh"
+`include "uart_if.svh"
+`include "verif_pkg.svh"
 module top_tb;
+
+   import uvm_pkg::*;
+   import verif_pkg::*;
 
    initial
    begin
