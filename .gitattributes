@@ -1,2 +1,1 @@
-* linguist-vendored
-* .SystemVerilog linguist-vendored=false
+*.svh linguist-language=SystemVerilog
