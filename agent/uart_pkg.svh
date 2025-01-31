@@ -6,6 +6,7 @@ package uart_pkg;
  
     `include "uart_seqit.svh"
  
+    `include "uart_config.svh"
     `include "uart_driver.svh"
     `include "uart_monitor.svh"
     `include "uart_sequencer.svh"
