@@ -1,7 +1,7 @@
 interface uart_if
    (
-   input reset,
-   input clk
+   input resetn_i,
+   input clock_i
 );
 
    import uart_pkg::*;

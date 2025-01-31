@@ -22,9 +22,19 @@ module top_tb;
 
    // Interface declarations
    uart_if uart_if_inst(
-      .reset(resetn_i),
-      .clk(clock_i)
+      .resetn_i(resetn_i),
+      .clock_i(clock_i)
    );
+
+   //DUT instance, interface signals are connected to the DUT ports
+   UartRx uart_rx_inst(
+      .clk(uart_if_inst.clock_i),
+      .nReset(uart_if_inst.resetn_i),
+      .in(uart_if_inst.rx_din_i),
+      .data(uart_if_inst.rx_data_o),
+      .done(uart_if_inst.rx_done),
+      .err(uart_if_inst.rx_err)
+  );
 
    initial
    begin
