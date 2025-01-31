@@ -7,21 +7,32 @@ module top_tb;
    import uvm_pkg::*;
    import verif_pkg::*;
 
-   initial
-   begin
-      // Initialize reset
+   //clock and reset signal declaration
+   bit clock_i;
+   bit resetn_i;
+
+   //clock generation
+   always #(uart_if_inst.c_CLOCK_PERIOD_NS/2) clock_i = ~clock_i;
+
+   //reset Generation
+   initial begin
+       #(3*uart_if_inst.c_CLOCK_PERIOD_NS); resetn_i = 0;
+       #(3*uart_if_inst.c_CLOCK_PERIOD_NS); resetn_i = 1;
    end
 
-   // Clock Generation
-
-
    // Interface declarations
+   uart_if uart_if_inst(
+      .reset(resetn_i),
+      .clk(clock_i)
+   );
 
-   // Connection of DUT
    initial
    begin
-      // Register interfaces to uvm_config_db
-      // Run UVM test class
+      // Setting interfaces to uvm_config_db
+      uvm_config_db #(virtual uart_if)::set(null,"*","uart_vif",uart_if_inst);
+
+      // Execute UVM test class
+      run_test("tc_direct_urx");
    end
 
 endmodule: top_tb
