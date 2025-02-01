@@ -1,7 +1,27 @@
-interface uart_if #(DATA_WIDTH = 8)
+interface uart_if
    (
-   input reset,
-   input clk
+   input resetn_i,
+   input clock_i
 );
+
+   import uart_pkg::*;
+
+   parameter baud_rate_g    = 115_200  ;
+   parameter c_CLOCK_PERIOD_NS = 10    ; // 100MHZ
+   parameter c_CLKS_PER_BIT    = 87    ; // (osc_freq_g / baud_rate_g)
+   parameter c_BIT_PERIOD      = 8680  ; // (1 / baud_rate_g)
+
    // Bus Signals
+
+   logic [11:0] baud_div               ;
+   logic rx_din_i                      ;
+   logic txd                           ;
+   logic txen                          ;
+   logic[7:0] tx_data_i                ;
+   logic rx_done                       ;
+   logic[7:0] rx_data_o                ;
+   logic rx_ing                        ;
+   logic tx_ing                        ;
+   logic rx_err                        ;
+
 endinterface
