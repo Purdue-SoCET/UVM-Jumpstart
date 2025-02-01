@@ -1,6 +1,9 @@
 class uart_monitor extends uvm_monitor;
    `uvm_component_utils(uart_monitor)
 
+   // Config class  
+   uart_config uart_config_h;
+
    extern function new(string name = "uart_monitor", uvm_component parent);
    extern function void build_phase(uvm_phase phase);
    extern function void connect_phase(uvm_phase phase);
