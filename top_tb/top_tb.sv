@@ -1,4 +1,3 @@
-`timescale 1ns/1ps
 `include "uart_pkg.svh"
 `include "uart_if.svh"
 `include "verif_pkg.svh"
@@ -16,8 +15,8 @@ module top_tb;
 
    //reset Generation
    initial begin
-       #(3*uart_if_inst.c_CLOCK_PERIOD_NS); resetn_i = 0;
-       #(3*uart_if_inst.c_CLOCK_PERIOD_NS); resetn_i = 1;
+      #(3*uart_if_inst.c_CLOCK_PERIOD_NS); resetn_i = 0;
+      #(3*uart_if_inst.c_CLOCK_PERIOD_NS); resetn_i = 1;
    end
 
    // Interface declarations

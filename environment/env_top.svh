@@ -28,7 +28,7 @@ function void env_top::build_phase(uvm_phase phase);
       VIF_FATAL: `uvm_fatal("VIF CONFIG","cannot get uart_vif from uvm_config_db")
    end
    // Set the config paramaeters (baud, parity, reset poloarity. etc) of the agent
-   uvm_config_db #(uart_config)::set(this,"uart_agent_config_h", "uart_config", uart_agent_config_h);
+   uvm_config_db #(uart_config)::set(this,"uart_agent_h", "uart_config", uart_agent_config_h);
    
    // Configure agent
    configuration();    
