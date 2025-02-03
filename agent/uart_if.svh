@@ -7,7 +7,7 @@ interface uart_if
    import uart_pkg::*;
 
    parameter baud_rate_g    = 115_200  ;
-   parameter c_CLOCK_PERIOD_NS = 100    ; // 100MHZ
+   parameter c_CLOCK_PERIOD_NS = 10    ; // 100MHZ
    parameter c_CLKS_PER_BIT    = 87    ; // (osc_freq_g / baud_rate_g)
    parameter c_BIT_PERIOD      = 8680  ; // (1 / baud_rate_g)
    string reset_polarity;

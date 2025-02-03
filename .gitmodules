@@ -1,3 +1,9 @@
 [submodule "PurdNyUart"]
 	path = PurdNyUart
 	url = https://github.com/NYU-Processor-Design/PurdNyUart.git
+[submodule "CHIPKIT"]
+	path = CHIPKIT
+	url = https://github.com/whatmough/CHIPKIT
+[submodule "UVM_1.2"]
+	path = UVM_1.2
+	url = https://github.com/Purdue-SoCET/UVM_1.2
