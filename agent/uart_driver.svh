@@ -29,7 +29,7 @@ class uart_driver extends uvm_driver #(uart_seqit);
         // TODO move another place
         // TODO This calculation might be affected by timeunit, to be found a solution
         // Calculating bit_time and converting to nanosec
-        bit_time = 104166;
+        bit_time = vif.c_BIT_PERIOD;
 
         //Drive the interface
         forever  begin
