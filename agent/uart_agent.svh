@@ -29,7 +29,7 @@ function void uart_agent::build_phase(uvm_phase phase);
     //  Passive UVM Agent only Monitor is created.
     monitor_h = uart_monitor::type_id::create("h_monitor", this);
     driver_h = uart_driver::type_id::create("h_driver", this);
-    sequencer_h = uart_sequencer::type_id::create("h_sequencer", this);
+    sequencer_h = uart_sequencer::type_id::create("sequencer_h", this);
 
 endfunction:build_phase
 

@@ -8,7 +8,7 @@ class uart_config extends uvm_object;
  
     // UART Conifigurations
     int baud_rate                   = 9600;
-    string number_data_bits            = "EIGHT_WIDTH";
+    int number_data_bits            = 8;
     string reset_polarity           = "ACTIVE_LOW";
     string number_stop_bits            = "STOP_BIT_ONEBIT";
     string parity_type              = "PARITY_NONE";

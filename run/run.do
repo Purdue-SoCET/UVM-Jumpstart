@@ -24,7 +24,6 @@ set lib_folder uart ; #normally lib_folder
 set lib_name ${lib_folder}_lib
 vlib modelsim_lib/$lib_name
 vmap $lib_name modelsim_lib/$lib_name
-vlog -work $lib_name [file join $rtl_dir UartRxEn.sv]
 vlog -work $lib_name [file join $rtl_dir UartRx.sv]
 
 # ################################################################################
@@ -35,3 +34,8 @@ if [file exists work] {vdel -all}
 vlib work
 vlog ../uvm_1.2/src/uvm_pkg.sv +incdir+../uvm_1.2/src/ +define+UVM_NO_DPI
 vlog -f compile_sv.f
+onbreak {resume}
+set NoQuitOnFinish 1
+vsim -voptargs="+acc" -L uart_lib top_tb +UVM_TESTNAME=tc_direct_urx -t 10ns
+add wave -position end sim:/top_tb/uart_rx_inst/*
+run -all
