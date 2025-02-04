@@ -27,7 +27,7 @@
 # Please follow the steps below to complie design and verification files
 
 ```
-- Make sure you are in UVM-Jumsptart folder.
+- Make sure you are in UVM-Jumpstart folder.
 - Once you are in UVM-Jumpstart folder, go to run folder. (cd run)
 - Run the binary file of Modelsim.
 - After Modelsim is opened, run the "do run.do" command in Modelsim console.
