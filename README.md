@@ -1,5 +1,7 @@
 # UVM-Jumpstart
-### This repo gives a quick practical introduction to UVM. It is stressing the UART receiver side, and it gives a basic implementation of the UVM infrastructure.
+### This repo gives a quick practical introduction to UVM. It is stressing the UART receiver side, and it gives a basic implementation of the UVM infrastructure. It works with Microchip's Modelsim free version. There is no need to have compiled UVM libraries. Design,simulation, and UVM libraries are compiled through ".do" file located under "run" folder. All the work has been realized in Ubuntu operating system.
+
+![image info](./docs/uvm.svg)
 
 ### **Note:** There are two different RTL design files. They require manipulations in order to pass the compilation steps. Also, the baud rate configuration seems to be missing for PurdNyUart repo. Therefore, expected results and actual results do not match for this repo. Once it is understood how the baud rate is inserted into to UartRx.sv file, the comparison will be as expected.
 
