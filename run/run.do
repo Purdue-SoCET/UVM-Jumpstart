@@ -34,9 +34,9 @@ set lib_folder uart ; #normally lib_folder
 set lib_name ${lib_folder}_lib
 vlib modelsim_lib/$lib_name
 vmap $lib_name modelsim_lib/$lib_name
-vlog -work $lib_name ../CHIPKIT/ip/rtl_inc/RTL.svh
+vlog -work $lib_name -E rtl_macros.svh ../CHIPKIT/ip/rtl_inc/RTL.svh
 vlog -work $lib_name  [file join $rtl_ck_dir comm_defs_pkg.sv]
-vlog -work $lib_name  [file join $rtl_ck_dir uart.sv]
+vlog -work $lib_name -mfcu ../CHIPKIT/ip/rtl_inc/RTL.svh [file join $rtl_ck_dir uart.sv]
 
 
 # ################################################################################
