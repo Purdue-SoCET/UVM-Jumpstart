@@ -5,4 +5,6 @@ run/transcript
 run/wave.do
 run/modelsim.ini
 run/work/
+run/rtl_macros.svh
+run/tr_db.log
 transcript
