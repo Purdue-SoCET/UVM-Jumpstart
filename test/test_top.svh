@@ -5,7 +5,6 @@ class test_top extends uvm_test;
 
    extern function new(string name = "test_top" , uvm_component parent);
    extern function void build_phase(uvm_phase phase);
-   extern task run_phase(uvm_phase phase);
 
 endclass:test_top
 
@@ -19,9 +18,3 @@ function void test_top::build_phase(uvm_phase phase);
    // Create env class
    env_h = env_top::type_id::create("env_h", this);
 endfunction:build_phase
-
-task test_top::run_phase(uvm_phase phase);
-   phase.raise_objection(this);
-   #10ns;
-   phase.drop_objection(this);
-endtask
