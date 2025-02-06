@@ -46,7 +46,7 @@ vlog -work $lib_name -mfcu ../CHIPKIT/ip/rtl_inc/RTL.svh [file join $rtl_ck_dir 
 set lib_name ${top_level_sim}
 vlib modelsim_lib/$lib_name
 vmap $lib_name modelsim_lib/$lib_name
-vlog -work $lib_name $uvm_dir/UVM_1.2/src/uvm_pkg.sv +incdir+$uvm_dir/UVM_1.2/src/ +define+UVM_NO_DPI
+vlog -work $lib_name $uvm_dir/UVM_1.2/src/uvm_pkg.sv \+incdir+$uvm_dir/UVM_1.2/src/ +define+UVM_NO_DPI
 vlog -work $lib_name -f compile_sv.f
 
 # ################################################################################
@@ -59,6 +59,7 @@ vsim -voptargs=+acc                 \
     ${test_bench}                   \
     +UVM_TESTNAME=tc_direct_urx     \
     -t 1ns 
+set NoQuitOnFinish 1
 add wave -divider CHIPKIT
 add wave -radix hexadecimal -position insertpoint sim:/top_tb/uart_rx_CHIPKIT_inst/*
 add wave -divider PurdNyUart
