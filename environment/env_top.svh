@@ -23,8 +23,8 @@ function void env_top::build_phase(uvm_phase phase);
    // Construct agent class
    uart_agent_h = uart_agent::type_id::create("uart_agent_h",this);
 
-   // Get virtual interfaces from config_db
-   if(!uvm_config_db #(virtual uart_if)::get(this,"", $sformatf("uart_vif"),uart_agent_config_h.vif)) begin
+   // Get virtual interfaces, which is set by top_tb, from config_db
+   if(!uvm_config_db #(virtual uart_if)::get(this, "", "uart_vif", uart_agent_config_h.vif)) begin
       VIF_FATAL: `uvm_fatal("VIF CONFIG","cannot get uart_vif from uvm_config_db")
    end
    // Set the config paramaeters (baud, parity, reset poloarity. etc) of the agent
@@ -41,10 +41,8 @@ endfunction:connect_phase
 
 function void env_top::configuration();
    
-   uart_agent_config_h.baud_rate        = 9_600;
-   uart_agent_config_h.number_data_bits = "EIGHT_WIDTH";
+   uart_agent_config_h.baud_rate        = 115_200;
+   uart_agent_config_h.number_data_bits = 8;
    uart_agent_config_h.reset_polarity   = "ACTIVE_LOW";
-   uart_agent_config_h.parity_type      = "PARITY_NONE";
-   uart_agent_config_h.number_stop_bits = "STOP_BIT_ONEBIT";
    
 endfunction: configuration
