@@ -26,32 +26,34 @@ module top_tb;
 
    //DUT instance, interface signals are connected to the DUT ports
    UartRx uart_rx_PurdNyUart_inst(
-      .clk        (uart_if_inst.clock_i),
-      .nReset     (uart_if_inst.resetn_i),
-      .in         (uart_if_inst.rx_din_i),
+      .clk        (uart_if_inst.clock_i)  ,
+      .nReset     (uart_if_inst.resetn_i) ,
+      .in         (uart_if_inst.rx_din_i) ,
       .data       (uart_if_inst.rx_data_o),
-      .done       (uart_if_inst.rx_done),
+      .done       (uart_if_inst.rx_done)  ,
       .err        (uart_if_inst.rx_err)
   );
 
   uart  uart_rx_CHIPKIT_inst(
-      .clk        (uart_if_inst.clock_i),
-      .rstn       (uart_if_inst.resetn_i),
-      .baud_div   (12'd217),
-      .rxd        (uart_if_inst.rx_din_i),
-      .txd        (),
-      .txen       (),
-      .tx_byte    (),
-      .rx_done    (),
-      .rx_byte    (),
-      .rx_ing     (),
-      .tx_ing     (),
+      .clk        (uart_if_inst.clock_i)  ,
+      .rstn       (uart_if_inst.resetn_i) ,
+      .baud_div   (12'd217)               ,
+      .rxd        (uart_if_inst.rx_din_i) ,
+      .txd        ()                      ,
+      .txen       ()                      ,
+      .tx_byte    ()                      ,
+      .rx_done    ()                      ,
+      .rx_byte    ()                      ,
+      .rx_ing     ()                      ,
+      .tx_ing     ()                      ,
       .rx_err     ()
 );
 
    initial
    begin
       // Setting interfaces to uvm_config_db
+      // config_db get is done in env_top class
+      //ToDo do not globally set the vif to the config_db. Specify a location
       uvm_config_db #(virtual uart_if)::set(null,"*","uart_vif",uart_if_inst);
       // Execute UVM test class
       run_test();
