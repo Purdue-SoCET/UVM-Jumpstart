@@ -4,50 +4,56 @@
 transcript quietly
 rm -rf ./modelsim_lib
 
-set rtl_dir         ../PurdNyUart/rtl/UartRx    ;   # RTL design folders for PurdNyUart
-set rtl_ck_dir      ../CHIPKIT/ip/commctrl      ;   # RTL design folders for CHIPKIT
-set uvm_dir         ../                         ;   # UVM libraries' directory
+set rtl_dir         ../PurdNyUart/rtl/UartRx/   ;   # RTL design folder for PurdNyUart
+set rtl_ck_dir      ../CHIPKIT/ip/commctrl/     ;   # RTL design folder for CHIPKIT
+set rtl_ck_inc_dir  ../CHIPKIT/ip/rtl_inc/      ;   # RTL design macros folder for CHIPKIT
+set agent_dir       ../agent/                   ;   # agent directory
+set env_dir         ../environment/             ;   # environment directory
+set uvm_dir         ../UVM_1.2/src/             ;   # UVM libraries' directory
 set top_level       top                         ;   # testbench top name
 set top_level_sim   uart_sim_lib                ;   # top_level simulation library.
 set test_bench      ${top_level}_tb             ;   # testbench name 
-set uvm_test_name   tc_direct_urx               ;   # UVM testname
+set top_dir         ../$test_bench              ;   # Top level testbench directory
+set uvm_test        tc_direct_urx               ;   # UVM testname
 
 if {[file exist modelsim_lib] } { file delete  -force modelsim_lib} 
 file mkdir modelsim_lib
 
 ################################################################################
-# COMPILE RTL_DESIGN MODULES
+# COMPILE RTL DESIGN MODULES
 ###############################################################################
 
-##  for all libraries do the following: 
+# for all libraries do the following: 
 # create library, map to library, compile sources into library 
-# tmpv stands for temporary variable 
 set lib_folder uart;
 set lib_name ${lib_folder}_lib
 vlib modelsim_lib/$lib_name
 vmap $lib_name modelsim_lib/$lib_name
 vlog -work $lib_name [file join $rtl_dir UartRx.sv]
 
-## for all libraries do the following: 
+# for all libraries do the following: 
 # create library, map to library, compile sources into library 
 # tmpv stands for temporary variable 
 set lib_folder uart ;
 set lib_name ${lib_folder}_lib
 vlib modelsim_lib/$lib_name
 vmap $lib_name modelsim_lib/$lib_name
-vlog -work $lib_name -E rtl_macros.svh ../CHIPKIT/ip/rtl_inc/RTL.svh
-vlog -work $lib_name  [file join $rtl_ck_dir comm_defs_pkg.sv]
-vlog -work $lib_name -mfcu ../CHIPKIT/ip/rtl_inc/RTL.svh [file join $rtl_ck_dir uart.sv]
+vlog -work $lib_name -E rtl_macros.svh [file join $rtl_ck_inc_dir RTL.svh]
+vlog -work $lib_name [file join $rtl_ck_dir comm_defs_pkg.sv]
+vlog -work $lib_name -mfcu [file join $rtl_ck_inc_dir RTL.svh] [file join $rtl_ck_dir uart.sv]
 
 ################################################################################
 # COMPILE SIMULATION MODULES
 ###############################################################################
 
+# for all libraries do the following: 
+# create library, map to library, compile sources into library 
 set lib_name ${top_level_sim}
 vlib modelsim_lib/$lib_name
 vmap $lib_name modelsim_lib/$lib_name
-vlog -work $lib_name $uvm_dir/UVM_1.2/src/uvm_pkg.sv \+incdir+$uvm_dir/UVM_1.2/src/ +define+UVM_NO_DPI
-vlog -work $lib_name -f compile_sv.f
+vlog -work $lib_name [file join $uvm_dir uvm_pkg.sv] +incdir+$uvm_dir +define+UVM_NO_DPI
+vlog -work $lib_name [file join $agent_dir uart_pkg.svh] +incdir+$agent_dir+$uvm_dir
+vlog -work $lib_name [file join $top_dir top_tb.sv] +incdir+$agent_dir+$uvm_dir+$env_dir
 
 # ################################################################################
 # SIMULATE
@@ -57,7 +63,7 @@ vsim -voptargs=+acc                 \
     -L uart_lib                     \
     -lib ${top_level_sim}           \
     ${test_bench}                   \
-    +UVM_TESTNAME=tc_direct_urx     \
+    +UVM_TESTNAME=$uvm_test         \
     -t 1ns 
 set NoQuitOnFinish 1
 add wave -divider CHIPKIT
