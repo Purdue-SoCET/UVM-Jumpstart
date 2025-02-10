@@ -10,7 +10,7 @@ interface uart_if
    // Bus Signals
    logic [11:0] baud_div                  ;
    logic rx_din_i                         ;
-   logic txd                              ;
+   logic tx_dout_o                        ;
    logic txen                             ;
    logic[7:0] tx_data_i                   ;
    logic rx_done                          ;

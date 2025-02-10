@@ -3,7 +3,7 @@ class uart_driver extends uvm_driver #(uart_seqit);
 
     // Config class  
    uart_config uart_config_h;
-   // Virtual interface holds the pointer to the Interface.    
+   // Virtual interface    
    virtual uart_if vif;
    realtime bit_time;
 
