@@ -24,7 +24,7 @@ class uart_driver extends uvm_driver #(uart_seqit);
         // Reset bus
         reset_tx_bus();
         // Wait reset signal
-        vif.wait_reset();
+        wait_reset();
         // Calculating bit per second
         bit_time = (1 / real'(uart_config_h.baud_rate))*10**9;
         // Drive the interface
