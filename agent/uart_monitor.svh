@@ -61,12 +61,19 @@ task uart_monitor::collect_data();
          mon_seqit.mon_data[i] <= vif.tx_dout_o;
       end
 
-      // Go to the middle of stop bit
+      // Go to the middle of first stop bit
       #(bit_time);
       if(vif.tx_dout_o == 1'b1) begin
-         STOP_BIT_PASSED: `uvm_info(get_type_name(), "Stop bit is detected", UVM_LOW)
+         STOP_BIT_PASSED: `uvm_info(get_type_name(), "First stop bit is detected", UVM_LOW)
       end else begin
-         STOP_BIT_FAILED: `uvm_error(get_type_name(), "Stop bit is not detected")
+         STOP_BIT_FAILED: `uvm_error(get_type_name(), "First Stop bit is not detected")
+      end
+      // Go to the middle of second stop bit
+      #(bit_time);
+      if(vif.tx_dout_o == 1'b1) begin
+         STOP_BIT_PASSED2: `uvm_info(get_type_name(), "Second stop bit is detected", UVM_LOW)
+      end else begin
+         STOP_BIT_FAILED2: `uvm_error(get_type_name(), "Second stop bit is not detected")
       end
       mon_seqit.print();
    end
