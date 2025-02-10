@@ -15,6 +15,7 @@ set top_level_sim   uart_sim_lib                ;   # top_level simulation libra
 set test_bench      ${top_level}_tb             ;   # testbench name 
 set top_dir         ../$test_bench              ;   # Top level testbench directory
 set uvm_test        tc_direct_urx               ;   # UVM testname
+set uvm_verbosity   UVM_LOW                     ;   # Set verbosity level for the prints
 
 if {[file exist modelsim_lib] } { file delete  -force modelsim_lib} 
 file mkdir modelsim_lib
@@ -63,9 +64,12 @@ vsim -voptargs=+acc                 \
     -L uart_lib                     \
     -lib ${top_level_sim}           \
     ${test_bench}                   \
+    +UVM_VERBOSITY=$uvm_verbosity   \
     +UVM_TESTNAME=$uvm_test         \
     -t 1ns 
 set NoQuitOnFinish 1
+add wave -divider uart_if_inst
+add wave -radix hexadecimal -position insertpoint sim:/top_tb/uart_if_inst/*
 add wave -divider CHIPKIT
 add wave -radix hexadecimal -position insertpoint sim:/top_tb/uart_rx_CHIPKIT_inst/*
 add wave -divider PurdNyUart
