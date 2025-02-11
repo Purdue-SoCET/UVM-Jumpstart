@@ -4,7 +4,9 @@ class uart_scoreboard extends uvm_scoreboard;
 
     // TLM analysis implicit declaration
     `uvm_analysis_imp_decl(_observed)
+    `uvm_analysis_imp_decl(_expected)
     uvm_analysis_imp_observed #(uart_seqit, uart_scoreboard) observed;
+    uvm_analysis_imp_observed #(uart_seqit, uart_scoreboard) expected;
     uart_seqit expected_data[$];
     int num_of_err = 0, num_of_passed = 0;
   
@@ -32,18 +34,17 @@ class uart_scoreboard extends uvm_scoreboard;
       super.new(name, parent);
       observed = new("observed", this);
     endfunction
+
+    function void write_expected(uart_seqit tr);
+
+      expected_data.push_back(tr);
+
+   endfunction:write_expected
   
     function void write_observed(uart_seqit tr);
       // Pop expected_seqit_h class which is injected from test
-      expected_seqit_h = expected_data.pop_front();
-        if (tr.compare(expected_seqit_h)) begin
-          `uvm_info(get_type_name(), "COMPARE : Monitored data matches with expected data", UVM_LOW);
-          num_of_passed++;
-        end else begin
-          `uvm_error(get_type_name(), "MISMATCH : Monitored data NOT matched with expected data");
-          num_of_err++;
-        end
-  
+      expected_seqit_h = uart_seqit::type_id::create("expected_seqit_h");
+      expected_seqit_h = expected_data.pop_front();  
     endfunction:write_observed
   
     virtual function void check_phase(input uvm_phase phase);
