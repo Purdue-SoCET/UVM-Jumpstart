@@ -1,9 +1,9 @@
-    //`uvm_analysis_imp_decl(_expected)
-    `uvm_analysis_imp_decl(_observed)
 class uart_scoreboard extends uvm_scoreboard;
     // UVM macro Factory registration
     `uvm_component_utils(uart_scoreboard)
-  
+
+    // TLM analysis implicit declaration
+    `uvm_analysis_imp_decl(_observed)
     uvm_analysis_imp_observed #(uart_seqit, uart_scoreboard) observed;
     uart_seqit expected_data[$];
     int num_of_err = 0, num_of_passed = 0;
@@ -50,9 +50,9 @@ class uart_scoreboard extends uvm_scoreboard;
       super.check_phase(phase);
   
       if (num_of_err > 0) begin
-        `uvm_error(get_type_name(), $sformatf("Found %0d wrong data!", num_of_err));
+        `uvm_error(get_type_name(), $sformatf("Found %0d data!", num_of_err));
       end else if (num_of_passed > 0) begin
-        `uvm_info(get_type_name(), $sformatf("Found %0d pixels data!", num_of_passed), UVM_LOW);
+        `uvm_info(get_type_name(), $sformatf("Found %0d data!", num_of_passed), UVM_LOW);
       end else begin
         `uvm_error(get_type_name(), $sformatf("Simulation could not be realized"));
       end

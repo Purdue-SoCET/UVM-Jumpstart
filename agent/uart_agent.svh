@@ -40,6 +40,4 @@ function void uart_agent::connect_phase(uvm_phase phase);
     monitor_h.uart_config_h = uart_config_h;
     driver_h.uart_config_h = uart_config_h;
 
-   monitor_h.monitor_port.connect(env_top.uart_scoreboard_h.observed);
-
 endfunction:connect_phase
