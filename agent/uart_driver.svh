@@ -1,4 +1,5 @@
 class uart_driver extends uvm_driver #(uart_seqit);
+    // UVM macro Factory registration
    `uvm_component_utils(uart_driver)
 
     // Config class  

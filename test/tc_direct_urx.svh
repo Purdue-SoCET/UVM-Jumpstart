@@ -5,6 +5,7 @@ class tc_direct_urx extends test_top;
 
    extern function new(string name = "tc_direct_urx" , uvm_component parent);
    extern function void build_phase(uvm_phase phase);
+   extern function void connect_phase(uvm_phase phase);
    extern task run_phase(uvm_phase phase);
 
 endclass:tc_direct_urx
@@ -18,6 +19,10 @@ function void tc_direct_urx::build_phase(uvm_phase phase);
     // Create sequences
    uart_sequence_h = uart_sequence::type_id::create("uart_sequence_h");
 endfunction:build_phase
+
+function void tc_direct_urx::connect_phase(uvm_phase phase);
+   env_h.uart_scoreboard_h.expected_data.push_back(uart_sequence_h.req);
+endfunction:connect_phase
 
 task tc_direct_urx::run_phase(uvm_phase phase);
    phase.raise_objection(this);

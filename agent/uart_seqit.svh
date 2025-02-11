@@ -1,4 +1,5 @@
 class uart_seqit extends uvm_sequence_item;
+    // UVM macro Factory registration
    `uvm_object_utils(uart_seqit)
 
     bit [7:0] data_arr[];
