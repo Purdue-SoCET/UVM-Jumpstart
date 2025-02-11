@@ -1,4 +1,5 @@
 class uart_monitor extends uvm_monitor;
+   // UVM macro Factory registration
    `uvm_component_utils(uart_monitor)
 
    // Config class  
@@ -6,6 +7,9 @@ class uart_monitor extends uvm_monitor;
    // Virtual interface    
    virtual uart_if vif;
    real bit_time;
+
+   // The monitored data written to monitor_port
+  uvm_analysis_port #(uart_seqit) monitor_port;
 
    extern function new(string name = "uart_monitor", uvm_component parent);
    extern function void build_phase(uvm_phase phase);
@@ -76,6 +80,7 @@ task uart_monitor::collect_data();
          STOP_BIT_FAILED_SECOND: `uvm_error(get_type_name(), "Second stop bit is not detected")
       end
       mon_seqit.print();
+      monitor_port.write(mon_seqit);
    end
 
 endtask: collect_data
