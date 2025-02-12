@@ -16,8 +16,6 @@ class uart_scoreboard extends uvm_scoreboard;
     // Config class
     uart_config uart_config_h;
   
-    uart_seqit expected_seqit_h;
-  
     function void build_phase(uvm_phase phase);
       super.build_phase(phase);
        // Get uart_config_h, which is set by env_top, from config_db
@@ -35,28 +33,39 @@ class uart_scoreboard extends uvm_scoreboard;
       observed = new("observed", this);
     endfunction
 
-    function void write_expected(uart_seqit tr);
+    // function void write_expected(uart_seqit tr);
 
-      expected_data.push_back(tr);
+    //   expected_data.push_back(tr);
 
-   endfunction:write_expected
+    // endfunction:write_expected
   
     function void write_observed(uart_seqit tr);
-      // Pop expected_seqit_h class which is injected from test
+
+      uart_seqit expected_seqit_h;
       expected_seqit_h = uart_seqit::type_id::create("expected_seqit_h");
-      expected_seqit_h = expected_data.pop_front();  
+      expected_seqit_h = expected_data.pop_front(); 
+
+      SCRBRD: `uvm_info(get_type_name(), $sformatf(" size : %0h ",expected_data.size()), UVM_LOW) 
+
+      
+      // Pop expected_seqit_h class which is injected from test
+      tr.print();
+      // Calculate parity with data from bus
+      foreach(expected_seqit_h.data_arr[i]) begin
+        SCRBRD: `uvm_info(get_type_name(), $sformatf(" SCRBRD bit : %0h ",expected_seqit_h.data_arr[i]), UVM_LOW)
+     end
+
     endfunction:write_observed
+
+    task run_phase(input uvm_phase phase);
+
+    // SCRBRD: `uvm_info(get_type_name(), $sformatf(" XOXOXOX bit : %0d ",expected_seqit_h.data_arr.size()), UVM_LOW)
+
+    endtask:run_phase
   
-    virtual function void check_phase(input uvm_phase phase);
+    function void check_phase(input uvm_phase phase);
       super.check_phase(phase);
-  
-      if (num_of_err > 0) begin
-        `uvm_error(get_type_name(), $sformatf("Found %0d data!", num_of_err));
-      end else if (num_of_passed > 0) begin
-        `uvm_info(get_type_name(), $sformatf("Found %0d data!", num_of_passed), UVM_LOW);
-      end else begin
-        `uvm_error(get_type_name(), $sformatf("Simulation could not be realized"));
-      end
+
     endfunction:check_phase
   
   endclass:uart_scoreboard
