@@ -49,17 +49,17 @@ class uart_driver extends uvm_driver #(uart_seqit);
     endtask:wait_reset
 
     virtual task drive_data(uart_seqit seqit);
-        for(int i = 0; i < seqit.data_arr.size; i++) begin
+        // for(int i = 0; i < seqit.data_arr.size; i++) begin
             // Start condition
             drive_if(1'b0);
             for(int j = 0; j < uart_config_h.number_data_bits; j++) begin
-               drive_if(seqit.data_arr[i][j]);
+               drive_if(seqit.data_arr[j]);
             end
             // First stop Bits
             drive_if(1'b1);
             // SEcond stop Bits
             drive_if(1'b1);
-        end
+        // end
     endtask:drive_data
 
     virtual task drive_if(logic data);

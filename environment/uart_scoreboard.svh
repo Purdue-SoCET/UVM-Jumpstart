@@ -45,16 +45,15 @@ class uart_scoreboard extends uvm_scoreboard;
       expected_seqit_h = uart_seqit::type_id::create("expected_seqit_h");
       expected_seqit_h = expected_data.pop_front(); 
 
-      SCRBRD: `uvm_info(get_type_name(), $sformatf(" XOXOXOX bit : %0d ",expected_data.size()), UVM_LOW) 
+      SCRBRD: `uvm_info(get_type_name(), $sformatf(" size : %0h ",expected_data.size()), UVM_LOW) 
 
       
       // Pop expected_seqit_h class which is injected from test
-      // SCRBRD: `uvm_info(get_type_name(), $sformatf(" XOXOXOX bit : %0d ",expected_seqit_h.data_arr.size()), UVM_LOW) 
       tr.print();
       // Calculate parity with data from bus
-    //   for(int i = 0; i < 8; i++) begin
-    //     SCRBRD: `uvm_info(get_type_name(), $sformatf(" SCRBRD bit : %0b ",expected_seqit_h.data_arr[0][0]), UVM_LOW)
-    //  end
+      foreach(expected_seqit_h.data_arr[i]) begin
+        SCRBRD: `uvm_info(get_type_name(), $sformatf(" SCRBRD bit : %0h ",expected_seqit_h.data_arr[i]), UVM_LOW)
+     end
 
     endfunction:write_observed
 
