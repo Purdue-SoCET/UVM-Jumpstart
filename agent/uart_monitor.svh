@@ -62,7 +62,6 @@ task uart_monitor::collect_data();
       // Calculate parity with data from bus
       for(int i = 0; i < uart_config_h.number_data_bits; i++) begin
          #(bit_time);
-         MONITORED_DATA: `uvm_info(get_type_name(), $sformatf(" Sampled bit : %0b ",vif.tx_dout_o), UVM_LOW)
          mon_seqit.mon_data[i] <= vif.tx_dout_o;
       end
 
@@ -80,7 +79,6 @@ task uart_monitor::collect_data();
       end else begin
          STOP_BIT_FAILED_SECOND: `uvm_error(get_type_name(), "Second stop bit is not detected")
       end
-      mon_seqit.print();
       monitor_port.write(mon_seqit);
    end
 
