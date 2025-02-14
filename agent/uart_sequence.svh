@@ -10,16 +10,11 @@ class uart_sequence extends uvm_sequence #(uart_seqit);
 
     virtual task body();
         start_item(req);
-        req.data_arr = 8'hBA;
-        finish_item(req);
-        start_item(req);
-        req.data_arr = 8'h5E;
-        finish_item(req);
-        start_item(req);
-        req.data_arr = 8'hBA;
-        finish_item(req);
-        start_item(req);
-        req.data_arr = 8'h11;
+        req.data_arr = new[4];
+        req.data_arr[0] = 8'hBA;
+        req.data_arr[1] = 8'h5E;
+        req.data_arr[2] = 8'hBA;
+        req.data_arr[3] = 8'h11;
         finish_item(req);
     endtask:body
 endclass:uart_sequence

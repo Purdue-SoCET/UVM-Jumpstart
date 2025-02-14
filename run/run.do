@@ -14,7 +14,7 @@ set top_level       top                         ;   # testbench top name
 set top_level_sim   uart_sim_lib                ;   # top_level simulation library.
 set test_bench      ${top_level}_tb             ;   # testbench name 
 set top_dir         ../$test_bench              ;   # Top level testbench directory
-set uvm_test        tc_direct_urx               ;   # UVM testname
+set uvm_test        tc_direct_urx_utx           ;   # UVM testname
 set uvm_verbosity   UVM_LOW                     ;   # Set verbosity level for the prints
 
 if {[file exist modelsim_lib] } { file delete  -force modelsim_lib} 

@@ -8,6 +8,6 @@ package verif_pkg;
     `include "../environment/uart_scoreboard.svh"
     `include "../environment/env_top.svh"
     `include "../test/test_top.svh"
-    `include "../test/tc_direct_urx.svh"
+    `include "../test/tc_direct_urx_utx.svh"
 
 endpackage

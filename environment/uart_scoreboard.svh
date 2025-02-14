@@ -25,6 +25,7 @@ class uart_scoreboard extends uvm_scoreboard;
     endfunction : build_phase
   
     function void connect_phase(uvm_phase phase);
+      // Just in case, if there is a need to use interface signals (could be enable, valid, etc for any other protocols)
       vif = uart_config_h.vif;
     endfunction : connect_phase
   
@@ -33,39 +34,43 @@ class uart_scoreboard extends uvm_scoreboard;
       observed = new("observed", this);
     endfunction
 
-    // function void write_expected(uart_seqit tr);
+    function void write_expected(uart_seqit tr);
 
-    //   expected_data.push_back(tr);
+      // Could be used to get data from driver
+      expected_data.push_back(tr);
 
-    // endfunction:write_expected
+    endfunction:write_expected
   
     function void write_observed(uart_seqit tr);
 
       uart_seqit expected_seqit_h;
       expected_seqit_h = uart_seqit::type_id::create("expected_seqit_h");
-      expected_seqit_h = expected_data.pop_front(); 
-
-      SCRBRD: `uvm_info(get_type_name(), $sformatf(" size : %0h ",expected_data.size()), UVM_LOW) 
-
-      
       // Pop expected_seqit_h class which is injected from test
+      expected_seqit_h = expected_data.pop_front(); 
+      // Print monitored data
       tr.print();
-      // Calculate parity with data from bus
-      foreach(expected_seqit_h.data_arr[i]) begin
-        SCRBRD: `uvm_info(get_type_name(), $sformatf(" SCRBRD bit : %0h ",expected_seqit_h.data_arr[i]), UVM_LOW)
-     end
+      // Print expected data
+      expected_seqit_h.print();
 
+     if (tr.compare(expected_seqit_h)) begin
+      `uvm_info(get_type_name(), "COMPARE : Monitored data matches with expected data", UVM_LOW);
+      num_of_passed++;
+    end else begin
+      `uvm_error(get_type_name(), "MISMATCH : Monitored data NOT matched with expected data");
+      num_of_err++;
+    end
     endfunction:write_observed
-
-    task run_phase(input uvm_phase phase);
-
-    // SCRBRD: `uvm_info(get_type_name(), $sformatf(" XOXOXOX bit : %0d ",expected_seqit_h.data_arr.size()), UVM_LOW)
-
-    endtask:run_phase
   
     function void check_phase(input uvm_phase phase);
       super.check_phase(phase);
 
+      if (num_of_err > 0) begin
+        `uvm_error(get_type_name(), $sformatf("%0d data failed!", num_of_err));
+      end else if (num_of_passed > 0) begin
+        `uvm_info(get_type_name(), $sformatf("%0d data passed!", num_of_passed), UVM_LOW);
+      end else begin
+        `uvm_error(get_type_name(), $sformatf("Simulation could not be realized"));
+      end
     endfunction:check_phase
   
   endclass:uart_scoreboard
