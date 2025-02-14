@@ -21,7 +21,7 @@ if {[file exist modelsim_lib] } { file delete  -force modelsim_lib}
 file mkdir modelsim_lib
 
 ################################################################################
-# COMPILE RTL DESIGN MODULES
+# COMPILE RTL DESIGN FILES
 ###############################################################################
 
 # for all libraries do the following: 
@@ -44,7 +44,7 @@ vlog -work $lib_name [file join $rtl_ck_dir comm_defs_pkg.sv]
 vlog -work $lib_name -mfcu [file join $rtl_ck_inc_dir RTL.svh] [file join $rtl_ck_dir uart.sv]
 
 ################################################################################
-# COMPILE SIMULATION MODULES
+# COMPILE VERIFICATION FILES
 ###############################################################################
 
 # for all libraries do the following: 
