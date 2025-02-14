@@ -8,20 +8,20 @@
 ### Comply with the below steps to checkout repo and submodules
 
 ```
-- git clone https://github.com/Purdue-SoCET/UVM-Jumpstart.git
-- git submodule init
-- git sumbodule update
+ git clone https://github.com/Purdue-SoCET/UVM-Jumpstart.git
+ git submodule init
+ git sumbodule update
 ```
 
 ### RTL Manipulation steps for ./PurdNyUart/UartRx/UartRx.sv file
 
 ```verilog
-- output done should be output logic done. (line 11)
-- output err should be output logic err. (line 12)
-- logic [3:0] readCount, logic [sampleWidth-1:0] sampleCount, and logic edgeCmp signals should be moved under 47th line. 
+ output done should be output logic done. (line 11)
+ output err should be output logic err. (line 12)
+ logic [3:0] readCount, logic [sampleWidth-1:0] sampleCount, and logic edgeCmp signals should be moved under 47th line. 
 ```
 
-### Once you've applied above steps. The RTL files can be compiled
+Once you've applied above steps. The RTL files can be compiled
 # Please follow the steps below to complie design and verification files
 
 ```
