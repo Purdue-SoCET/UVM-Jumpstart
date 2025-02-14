@@ -1,5 +1,4 @@
 class uart_config extends uvm_object;
-
     // UVM Factory Registiration
     `uvm_object_utils(uart_config)
  

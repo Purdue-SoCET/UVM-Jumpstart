@@ -1,4 +1,5 @@
 class uart_sequence extends uvm_sequence #(uart_seqit);
+    // UVM macro Factory registration
    `uvm_object_utils(uart_sequence)
 
     uart_seqit req;

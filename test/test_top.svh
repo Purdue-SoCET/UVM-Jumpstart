@@ -1,4 +1,5 @@
 class test_top extends uvm_test;
+   // UVM macro Factory registration
    `uvm_component_utils(test_top)
 
    env_top env_h;

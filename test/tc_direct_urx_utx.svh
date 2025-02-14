@@ -1,8 +1,9 @@
 class tc_direct_urx_utx extends test_top;
+   // UVM macro Factory registration
    `uvm_component_utils(tc_direct_urx_utx)
 
    uart_sequence uart_sequence_h;
-   bit [7:0] exp_data[4] = {8'hBA, 8'h5E, 8'hBA, 8'hFF};
+   bit [7:0] exp_data[4] = {8'hBA, 8'h5E, 8'hBA, 8'h11};
 
    extern function new(string name = "tc_direct_urx_utx" , uvm_component parent);
    extern function void build_phase(uvm_phase phase);
