@@ -23,7 +23,7 @@ module top_tb;
       .clock_i    (clock_i)
    );
 
-   //DUT instance, interface signals are connected to the DUT ports
+   // DUT instance, interface signals are connected to the DUT ports
    UartRx uart_rx_PurdNyUart_inst(
       .clk        (uart_if_inst.clock_i)     ,
       .nReset     (uart_if_inst.resetn_i)    ,
@@ -32,7 +32,7 @@ module top_tb;
       .done       ()                         ,
       .err        ()
   );
-
+   // RTL is loopbacked
   uart  uart_rx_CHIPKIT_inst(
       .clk        (uart_if_inst.clock_i)     ,
       .rstn       (uart_if_inst.resetn_i)    ,

@@ -1,4 +1,5 @@
 class tc_direct_urx_utx extends test_top;
+   // UVM macro Factory registration
    `uvm_component_utils(tc_direct_urx_utx)
 
    uart_sequence uart_sequence_h;
