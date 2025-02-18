@@ -10,7 +10,7 @@
  git submodule init
  git sumbodule update
 ```
-# After checking out the repo, please follow the steps below to complie design and verification files
+### After checking out the repo, please follow the steps below to complie design and verification files
 
 ```
  cd UVM-Jumpstart/run
