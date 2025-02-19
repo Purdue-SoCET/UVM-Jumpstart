@@ -1,6 +1,3 @@
-[submodule "PurdNyUart"]
-	path = PurdNyUart
-	url = https://github.com/NYU-Processor-Design/PurdNyUart.git
 [submodule "CHIPKIT"]
 	path = CHIPKIT
 	url = https://github.com/whatmough/CHIPKIT
