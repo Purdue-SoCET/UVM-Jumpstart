@@ -7,6 +7,7 @@ class uart_driver extends uvm_driver #(uart_seqit);
    // Virtual interface    
    virtual uart_if vif;
    realtime bit_time;
+   bit parity;
 
     function new(string name = "uart_driver" , uvm_component parent);
         super.new(name, parent);
@@ -41,7 +42,7 @@ class uart_driver extends uvm_driver #(uart_seqit);
     endtask:reset_tx_bus
 
     virtual task wait_reset();
-        if(uart_config_h.reset_polarity == "ACTIVE_LOW") begin
+        if(uart_config_h.reset_polarity == ACTIVE_LOW) begin
             @(posedge vif.resetn_i);
          end else begin
             @(negedge vif.resetn_i);
@@ -50,15 +51,40 @@ class uart_driver extends uvm_driver #(uart_seqit);
 
     virtual task drive_data(uart_seqit seqit);
         for(int i = 0; i < seqit.data_arr.size; i++) begin
+            parity = 0;
             // Start condition
             drive_if(1'b0);
+            // Send data and set parity
             for(int j = 0; j < uart_config_h.number_data_bits; j++) begin
                drive_if(seqit.data_arr[i][j]);
+               parity ^= seqit.data_arr[i][j];
             end
-            // First stop Bits
-            drive_if(1'b1);
-            // SEcond stop Bits
-            drive_if(1'b1);
+            // Parity bity
+            case(uart_config_h.parity_bit)
+                PARITY_ODD  : begin
+                   parity = ~parity;
+                   drive_if(parity);
+                end
+                PARITY_EVEN : begin
+                    drive_if(parity);
+                end
+                default : begin
+                   // PARITY_NONE
+                end
+             endcase
+            // Stop bit
+            case (uart_config_h.stop_bit)
+                STOP_BIT_TWOBITS  : begin
+                    // First stop bit
+                    drive_if(1'b1);
+                    // Second stop bit
+                    drive_if(1'b1);
+                 end
+                 STOP_BIT_ONEBIT  : begin
+                   // Send one bit
+                   drive_if(1'b1);
+                end
+            endcase
         end
     endtask:drive_data
 
