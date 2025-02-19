@@ -13,14 +13,14 @@
 
 ![image info](./docs/uvm.svg)
 
-### Comply with the below steps to checkout repo and submodules
+### Checkout repo and submodules
 
-```
+```shell
  git clone --recurse-submodules https://github.com/Purdue-SoCET/UVM-Jumpstart.git
 ```
-### After checking out the repo, please follow the steps below to complie design and verification files
+### After checking out the repo, please follow the steps below to start simulation in batch mode
 
-```
+```shell
  cd UVM-Jumpstart/run
  vsim -c -do run.do
 ```
