@@ -4,6 +4,7 @@ package uart_pkg;
  
     `include "uvm_macros.svh"
  
+    `include "typedefs.svh"
     `include "uart_seqit.svh"
  
     `include "uart_config.svh"

@@ -52,8 +52,10 @@ endfunction:connect_phase
 
 function void env_top::configuration();
    
-   uart_agent_config_h.baud_rate        = 115_200     ;
-   uart_agent_config_h.number_data_bits = 8           ;
-   uart_agent_config_h.reset_polarity   = "ACTIVE_LOW";
+   uart_agent_config_h.baud_rate          = 115_200            ;
+   uart_agent_config_h.number_data_bits   = EIGHT_WIDTH        ;
+   uart_agent_config_h.reset_polarity     = ACTIVE_LOW         ;
+   uart_agent_config_h.stop_bit           = STOP_BIT_TWOBITS   ;
+   uart_agent_config_h.parity_bit         = PARITY_NONE        ;
    
 endfunction: configuration

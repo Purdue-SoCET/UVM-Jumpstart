@@ -4,7 +4,6 @@
 transcript quietly
 rm -rf ./modelsim_lib
 
-set rtl_dir         ../PurdNyUart/rtl/UartRx/   ;   # RTL design folder for PurdNyUart
 set rtl_ck_dir      ../CHIPKIT/ip/commctrl/     ;   # RTL design folder for CHIPKIT
 set rtl_ck_inc_dir  ../CHIPKIT/ip/rtl_inc/      ;   # RTL design macros folder for CHIPKIT
 set agent_dir       ../agent/                   ;   # agent directory
@@ -23,14 +22,6 @@ file mkdir modelsim_lib
 ################################################################################
 # COMPILE RTL DESIGN FILES
 ###############################################################################
-
-# for all libraries do the following: 
-# create library, map to library, compile sources into library 
-set lib_folder uart;
-set lib_name ${lib_folder}_lib
-vlib modelsim_lib/$lib_name
-vmap $lib_name modelsim_lib/$lib_name
-vlog -work $lib_name [file join $rtl_dir UartRx.sv]
 
 # for all libraries do the following: 
 # create library, map to library, compile sources into library 
@@ -73,6 +64,4 @@ add wave -divider uart_if_inst
 add wave -radix hexadecimal -position insertpoint sim:/top_tb/uart_if_inst/*
 add wave -divider CHIPKIT
 add wave -radix hexadecimal -position insertpoint sim:/top_tb/uart_rx_CHIPKIT_inst/*
-add wave -divider PurdNyUart
-add wave -radix hexadecimal -position insertpoint sim:/top_tb/uart_rx_PurdNyUart_inst/*
 run -all
