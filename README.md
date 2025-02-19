@@ -3,9 +3,13 @@
  
  ### :zap: Key Features
 - Configurable Reset Polarity
+- Configurable Data bit settings
+- Configurable Baud Rate settings
 - Configurable Parity settings
 - Configurable Stop bit settings
 - Data error detection (expected vs actual)
+- Parity error detection
+- Stop bit error detection
 
 ![image info](./docs/uvm.svg)
 
@@ -126,6 +130,16 @@ endfunction:connect_phase
  uart_agent_config_h.parity_bit         = PARITY_NONE        ;
 ```
 - All set! :star:
+  
+## Configuration fields of the UVC (Default values types' are declared in ./agent/typedefs.svh).
+
+| Name              | Location                    | Default value   |
+| ---               | ---                         | ---             |
+| reset_polarity    | ./agent/uart_config.svh     | ACTIVE_LOW      |
+| baud_rate         | ./agent/uart_config.svh     | 115_200         |
+| number_data_bits  | ./agent/uart_config.svh     | EIGHT_WIDTH     |
+| stop_bit          | ./agent/uart_config.svh     | STOP_BIT_ONEBIT |
+| parity_bit        | ./agent/uart_config.svh     | PARITY_ODD      |
 
 ## To generate additional tests
 - Go to ./enviroment/verif_pkg.svh, and include your new testcase  `include "../test/your_new_testcase.svh"
