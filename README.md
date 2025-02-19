@@ -6,9 +6,7 @@
 ### Comply with the below steps to checkout repo and submodules
 
 ```
- git clone https://github.com/Purdue-SoCET/UVM-Jumpstart.git
- git submodule init
- git submodule update
+ git clone --recurse-submodules https://github.com/Purdue-SoCET/UVM-Jumpstart.git
 ```
 ### After checking out the repo, please follow the steps below to complie design and verification files
 
