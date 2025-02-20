@@ -142,7 +142,7 @@ endfunction:connect_phase
 | parity_bit        | ./agent/uart_config.svh     | PARITY_ODD      |
 
 ## To generate additional tests
-- Go to ./enviroment/verif_pkg.svh, and include your new testcase  `include "../test/your_new_testcase.svh"
+- Go to ./test/verif_pkg.svh, and include your new testcase  `include "../test/your_new_testcase.svh"
 ```verilog
 package verif_pkg;
 
