@@ -7,7 +7,7 @@ rm -rf ./modelsim_lib
 set rtl_ck_dir      ../CHIPKIT/ip/commctrl/     ;   # RTL design folder for CHIPKIT
 set rtl_ck_inc_dir  ../CHIPKIT/ip/rtl_inc/      ;   # RTL design macros folder for CHIPKIT
 set agent_dir       ../agent/                   ;   # agent directory
-set env_dir         ../environment/             ;   # environment directory
+set test_dir         ../test/                   ;   # location of verification package
 set uvm_dir         ../UVM_1.2/src/             ;   # UVM libraries' directory
 set top_level       top                         ;   # testbench top name
 set top_level_sim   uart_sim_lib                ;   # top_level simulation library.
@@ -46,7 +46,7 @@ vlib modelsim_lib/$lib_name
 vmap $lib_name modelsim_lib/$lib_name
 vlog -work $lib_name [file join $uvm_dir uvm_pkg.sv     ]   +incdir+$uvm_dir +define+UVM_NO_DPI
 vlog -work $lib_name [file join $agent_dir uart_pkg.svh ]   +incdir+$agent_dir+$uvm_dir
-vlog -work $lib_name [file join $top_dir top_tb.sv      ]   +incdir+$agent_dir+$uvm_dir+$env_dir
+vlog -work $lib_name [file join $top_dir top_tb.sv      ]   +incdir+$agent_dir+$uvm_dir+$test_dir
 
 # ################################################################################
 # SIMULATE
