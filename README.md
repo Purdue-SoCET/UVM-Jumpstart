@@ -18,7 +18,7 @@
 ```shell
  git clone --recurse-submodules https://github.com/Purdue-SoCET/UVM-Jumpstart.git
 ```
-### After checking out the repo, please follow the steps below to start the simulation
+### After checking out the repo, please follow the steps below to start simulation in batch mode
 
 ```shell
  cd UVM-Jumpstart/run
@@ -131,7 +131,11 @@ endfunction:connect_phase
 ```
 - All set! :star:
   
+<<<<<<< HEAD
 ## Configuration fields of the UVC (Default values types' are declared in ./agent/typedefs.svh)
+=======
+## Configuration fields of the UVC (Default values types' are declared in ./agent/typedefs.svh).
+>>>>>>> 70be3667116a6c7b5510c48731d4815423e9f583
 
 | Name              | Location                    | Default value   |
 | ---               | ---                         | ---             |
@@ -142,7 +146,11 @@ endfunction:connect_phase
 | parity_bit        | ./agent/uart_config.svh     | PARITY_ODD      |
 
 ## To generate additional tests
+<<<<<<< HEAD
 - Go to ./test/verif_pkg.svh, and include your new testcase  `include "../test/your_new_testcase.svh"
+=======
+- Go to ./enviroment/verif_pkg.svh, and include your new testcase  `include "../test/your_new_testcase.svh"
+>>>>>>> 70be3667116a6c7b5510c48731d4815423e9f583
 ```verilog
 package verif_pkg;
 
